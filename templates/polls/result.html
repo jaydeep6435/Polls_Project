@@ -1,0 +1,15 @@
+
+<html>
+    <head>
+        <title> Results </title>
+    </head>
+    <body>
+        <h1> {{question.ques_txt}}</h1>
+        <ul>
+            {% for choice in question.choice_set.all %}
+                <li> {{choice.choice_txt}} -- {{choice.votes}} vote{{choice.votes|pluralize}} </li>
+            {% endfor%}
+        </ul>
+        <p><a href="{% url 'polls:index' %}"> wanna votes for another question </p>
+    </body>
+</html>

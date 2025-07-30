@@ -1,0 +1,47 @@
+{% comment "" %}<html>
+    <head>
+        <title> choice app </title>
+    </head>
+    <body>
+        <h1>
+            {{question.ques_txt}} </h1>
+            <ul>
+                {% for choice in question.choice_set.all %}
+                <li> {{ choice.choice_txt }} </li>
+                {% endfor%}
+            </ul>
+    </body>
+</html> {% endcomment %}
+<html>
+    <head>
+    <title>
+        the details</title>
+    </head>
+    <body>
+        <form action="{% url "polls:vote" question.id%}" method="POST">
+            {% csrf_token %}  
+            <fieldset>
+                <legend> <h1> {{ question.ques_txt }} </h1> </legend>
+                {% if error_message %}
+                    <p> <strong> {{error_message}} </strong> </p>
+                {% endif %}
+                {% for choice in question.choice_set.all %}
+                    {% comment%}<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" >  {% endcomment %}
+                    <input type="radio" name="choice"  value="{{ choice.id }}" >
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_txt }}</label><br>
+
+                    
+
+                {% endfor %}
+            </fieldset>
+            <br>
+            <input type="submit" value="vote">
+
+            
+        </form>
+        <p><a href="{% url 'polls:details' question.id %}"> vote again? </p>
+        <p><a href="{% url 'polls:index' %}"> home </p>
+
+
+    </body>
+</html>

@@ -1,0 +1,7 @@
+{% extends "base_site.html" %}
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}"> {{site_header|default:_('django Administration')}} Polls Administration</a></div>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
